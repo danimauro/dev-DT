@@ -60,6 +60,7 @@ app.get('/productos/buscar', async(req, res) => {
             prodDB
         });
 
+
     } catch (error) {
         return res.status(500).json({
             ok: false,
@@ -67,6 +68,13 @@ app.get('/productos/buscar', async(req, res) => {
         });
     }
 
+});
+
+app.post('/admin/add/producto', async(req, res) => {
+    return res.status(200).json({
+        ok: true,
+        message: 'Add Producto'
+    });
 });
 
 module.exports = app;

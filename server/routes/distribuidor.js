@@ -3,19 +3,59 @@ const app = express();
 const Distribuidor = require('../models').Distribuidor;
 
 /*==============
-* Traer Distribuidor
+* Traer Distribuidores con los productos relacionados
 ================*/
-app.get('/distribuidor', (req, res) => {
+app.get('/admin/get/distri-productos', (req, res) => {
 
     Distribuidor.findAll({
         include: [{
             model: require('../models').Producto,
             attributes: ['Pro_Cod', 'Pro_Nombre', 'Pro_Tipo', 'Pro_marca', 'Pro_Descrip']
         }],
-    }).then(distri => {
+    }).then(distriDB => {
         return res.status(200).json({
             ok: true,
-            distri
+            distriDB
+        });
+    });
+
+});
+
+/*==============
+* Trae un listado de distribuidores
+================*/
+app.get('/distribuidores', (req, res) => {
+
+    Distribuidor.findAll({
+        attributes: ['Dis_Cod', 'Dis_Nombre', 'Dis_ID', 'Dis_Telefono', 'Dis_Direccion', 'Dis_Contacto', 'Dis_TelContacto', 'Dis_CorreoContacto']
+    }).then(distriDB => {
+        return res.status(200).json({
+            ok: true,
+            distriDB
+        });
+    });
+
+});
+
+/*==============
+* Trae un distribuidor ubicado por codigo
+================*/
+app.get('/distribuidor/:cod', (req, res) => {
+
+    Distribuidor.findAll({
+        where: { Dis_Cod: req.params.cod }
+    }).then(distriDB => {
+
+        if (distriDB.length == 0) {
+            return res.status(200).json({
+                ok: true,
+                message: 'No se encontro el distribuidor.'
+            });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            distriDB
         });
     });
 
@@ -63,8 +103,5 @@ app.post('/admin/add/distribuidor', async(req, res) => {
 
 
 });
-
-
-
 
 module.exports = app;

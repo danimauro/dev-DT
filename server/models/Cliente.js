@@ -28,7 +28,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         Cli_Correo: {
             allowNull: false,
-            type: DataTypes.STRING(50)
+            type: DataTypes.STRING(50),
+            validate: {
+                isEmail: true,
+            }
         },
         Cli_Estado: {
             allowNull: false,
