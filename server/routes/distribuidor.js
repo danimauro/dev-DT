@@ -72,7 +72,7 @@ app.post('/admin/add/distribuidor', async(req, res) => {
 
     try {
 
-        const distribuidor = await Distribuidor.create({
+        await Distribuidor.create({
 
             Dis_Nombre: body.Dis_Nombre,
             Dis_ID: body.Dis_ID,
@@ -87,7 +87,7 @@ app.post('/admin/add/distribuidor', async(req, res) => {
 
         return res.status(200).json({
             ok: true,
-            distribuidor
+            message: 'Distribuidor registrado correctamente'
         });
 
     } catch (error) {

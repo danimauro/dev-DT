@@ -20,6 +20,10 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.STRING(40)
             },
+            Ped_NomPersonaRecibe: {
+                allowNull: false,
+                type: Sequelize.STRING(50)
+            },
             Ped_Apto: {
                 allowNull: false,
                 type: Sequelize.STRING(20)
